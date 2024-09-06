@@ -23,7 +23,7 @@ namespace OWASP.WebGoat.NET.App_Code
                 bytes[i] = GenByte(token);
             }
 
-            log.Debug(string.Format("Bytes for {0}...", msg));
+            log.DebugFormat("Bytes for {0}...", msg);
             log.Debug(Print(bytes));
 
             return ascii.GetString(bytes);
