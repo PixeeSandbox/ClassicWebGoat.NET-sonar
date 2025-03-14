@@ -46,15 +46,15 @@ Free to use any way you like.
 
 jQuery.fn.initMenu = function() {  
     return this.each(function(){
-        var theMenu = $(this).get(0);
+        const theMenu = $(this).get(0);
         $('.acitem', this).hide();
         $('li.expand > .acitem', this).show();
         $('li.expand > .acitem', this).prev().addClass('active');
         $('li a', this).click(
             function(e) {
                 e.stopImmediatePropagation();
-                var theElement = $(this).next();
-                var parent = this.parentNode.parentNode;
+                const theElement = $(this).next();
+                const parent = this.parentNode.parentNode;
                 if($(parent).hasClass('noaccordion')) {
                     if(theElement[0] === undefined) {
                         window.location.href = this.href;
