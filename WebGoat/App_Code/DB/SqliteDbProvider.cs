@@ -124,7 +124,7 @@ namespace OWASP.WebGoat.NET.App_Code.DB
                 return false;
             }
         }
-
+        
         //Find the bugs!
         public string CustomCustomerLogin(string email, string password)
         {
@@ -132,23 +132,24 @@ namespace OWASP.WebGoat.NET.App_Code.DB
             try
             {
                 //get data
-                string sql = "select * from CustomerLogin where email = '" + email + "';";
+                string sql = "select * from CustomerLogin where email = @Email;";
                 
                 using (SqliteConnection connection = new SqliteConnection(_connectionString))
                 {
                     connection.Open();
-
+                    
                     SqliteDataAdapter da = new SqliteDataAdapter(sql, connection);
+                    da.SelectCommand.Parameters.AddWithValue("@Email", email);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
-
+                    
                     //check if email address exists
                     if (ds.Tables[0].Rows.Count == 0)
                     {
                         error_message = "Email Address Not Found!";
                         return error_message;
                     }
-
+                    
                     string encoded_password = ds.Tables[0].Rows[0]["Password"].ToString();
                     string decoded_password = Encoder.Decode(encoded_password);
 

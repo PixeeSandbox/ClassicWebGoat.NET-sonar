@@ -409,8 +409,7 @@ namespace TechInfoSystems.Data.SQLite
 			SqliteConnection cn = GetDbConnectionForProfile ();
 			try {
 				using (SqliteCommand cmd = cn.CreateCommand()) {
-					cmd.CommandText = "SELECT COUNT(*) FROM " + USER_TB_NAME + " u, " + PROFILE_TB_NAME + " p " +
-														"WHERE u.ApplicationId = $ApplicationId AND u.LastActivityDate <= $LastActivityDate AND u.UserId = p.UserId" + GetClauseForAuthenticationOptions (authenticationOption);
+					cmd.CommandText = string.Format("SELECT COUNT(*) FROM {0} u, {1} p WHERE u.ApplicationId = $ApplicationId AND u.LastActivityDate <= $LastActivityDate AND u.UserId = p.UserId {2}", USER_TB_NAME, PROFILE_TB_NAME, GetClauseForAuthenticationOptions(authenticationOption));
 
 					if (cn.State == ConnectionState.Closed)
 						cn.Open ();
