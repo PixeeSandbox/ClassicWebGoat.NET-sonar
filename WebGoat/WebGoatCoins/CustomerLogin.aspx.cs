@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.Security;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +57,9 @@ namespace OWASP.WebGoat.NET.WebGoatCoins
 
             // put ticket into the cookie
             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted_ticket);
+            cookie.SameSite = System.Web.SameSiteMode.Strict;
+            cookie.Secure = true;
+            cookie.HttpOnly = true;
 
             //set expiration date
             if (ticket.IsPersistent)
