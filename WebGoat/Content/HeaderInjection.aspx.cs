@@ -30,7 +30,7 @@ namespace OWASP.WebGoat.NET
 
 
             //Headers
-            lblHeaders.Text = Request.Headers.ToString().Replace("&", "<br />");
+            lblHeaders.Text = System.Web.HttpUtility.HtmlEncode(Request.Headers.ToString()).Replace("&amp;", "<br />");
 
             //Cookies
             ArrayList colCookies = new ArrayList();
